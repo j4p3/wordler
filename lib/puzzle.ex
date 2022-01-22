@@ -1,11 +1,6 @@
 defmodule Wordler.Puzzle do
   @moduledoc """
   Functions for solving Wordler puzzles.
-
-  Examples:
-
-  ```
-  ```
   """
   @default_source Wordler.Sources.Dict
 
@@ -42,8 +37,8 @@ defmodule Wordler.Puzzle do
 
   ## Examples
 
-  iex> Wordler.Puzzle.new()
-  %Wordler.Puzzle{word_list: [], ...}
+      iex> Wordler.Puzzle.new()
+      %Wordler.Puzzle{word_list: [], ...}
   """
   def new(options \\ []) do
     source_module = Keyword.get(options, :source, @default_source)
@@ -76,9 +71,9 @@ defmodule Wordler.Puzzle do
 
   ## Examples
 
-  iex> Wordler.Puzzle.new()
-  |> Wordler.Puzzle.new_guess()
-  "irate"
+      iex> Wordler.Puzzle.new()
+      |> Wordler.Puzzle.new_guess()
+      "irate"
   """
   @spec next_guess(t()) :: binary()
   def next_guess(puzzle) do
@@ -95,19 +90,20 @@ defmodule Wordler.Puzzle do
 
   Returns a new Puzzle with updated constraints and reduced word counts.
 
-  ##Examples
-  iex> puzzle = Wordler.Puzzle.new()
-  %Wordler.Puzzle{word_list: [], ...}
-  iex> length(puzzle.solution_list)
-  4594
-  iex> guess = Wordler.Puzzle.new_guess(puzzle)
-  "irate"
-  iex> results = [true, "r", false, false, false]
-  [true, "r", false, false, false]
-  iex> puzzle = Wordler.Puzzle.handle_guess(puzzle, guess, results)
-  %Wordler.Puzzle{word_list: [], ...}
-  iex> length(puzzle.solution_list)
-  95
+  ## Examples
+
+      iex> puzzle = Wordler.Puzzle.new()
+      %Wordler.Puzzle{word_list: [], ...}
+      iex> length(puzzle.solution_list)
+      4594
+      iex> guess = Wordler.Puzzle.new_guess(puzzle)
+      "irate"
+      iex> results = [true, "r", false, false, false]
+      [true, "r", false, false, false]
+      iex> puzzle = Wordler.Puzzle.handle_guess(puzzle, guess, results)
+      %Wordler.Puzzle{word_list: [], ...}
+      iex> length(puzzle.solution_list)
+      95
   """
   @spec handle_guess(t(), binary(), [true | false | binary()]) :: Wordler.Puzzle.t()
   def handle_guess(puzzle, guess, letter_results) do
