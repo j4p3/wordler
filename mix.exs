@@ -11,6 +11,7 @@ defmodule Wordler.MixProject do
       app: :wordler,
       version: @version,
       name: @name,
+      source_url: "https://github.com/j4p3/wordler",
       package: package(),
       elixir: "~> 1.13",
       start_permanent: Mix.env() == :prod,

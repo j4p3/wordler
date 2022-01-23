@@ -133,12 +133,10 @@ defmodule Wordler.Puzzle do
   end
 
   defp exploratory_guesses(puzzle) do
-    # guesses having as little in common as possible with guessed_letters as possible
-    reject_set = MapSet.difference(puzzle.solution_members, MapSet.new(puzzle.solution_positions))
-
+    # guesses having as little in common as possible with known solution members as possible
     puzzle.word_list
     |> Enum.reject(fn word ->
-      for(<<char <- word>>, do: char in reject_set)
+      for(<<char <- word>>, do: char in puzzle.solution_members)
       |> Enum.any?()
     end)
   end
@@ -187,7 +185,7 @@ defmodule Wordler.Puzzle do
       ])
       |> Enum.reduce_while(true, fn {char, at_position, not_at_position}, _ ->
         cond do
-          at_position && at_position != char ->
+          list_type != :word_list && at_position && at_position != char ->
             IO.puts(
               "rejecting #{word} due to position of #{<<char>>} conflicting with known #{<<at_position>>} at that position"
             )
